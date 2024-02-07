@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 export default function NewCollection() {
   const [new_collection, setnew_collection] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:4000/newcollections")
+    fetch("https://e-com-uryk.onrender.com/newcollections")
       .then((response) => response.json())
       .then((data) => setnew_collection(data));
   }, []);
