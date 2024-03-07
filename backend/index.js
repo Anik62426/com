@@ -194,6 +194,12 @@ app.get('/popularinwomen',async(req,res)=>{
   res.send(popular_in_women)
 })
 
+app.post('/popularbyid',async(req,res)=>{
+  let productsx = await Product.find({id:req.body.id});
+  // let popular_by_id = products.slice(0,1)
+  res.send(productsx)
+})
+
 app.post("/removeproduct", async (req, res) => {
   await Product.findOneAndDelete({ id: req.body.id });
   console.log("removed");
