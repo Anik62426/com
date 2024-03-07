@@ -15,7 +15,7 @@ const Product = () => {
    fetch('https://e-com-uryk.onrender.com/popularbyid', {
    method: 'POST',
    body: JSON.stringify({
-     id: 3,
+     id: productId,
    }),
    headers: {
      'Content-type': 'application/json; charset=UTF-8',
