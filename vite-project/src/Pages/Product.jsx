@@ -7,8 +7,9 @@ import ProductDisplay from '../Component/ProductDisplay/ProductDisplay'
 import Footer from '../Component/Footer/Footer'
 import { useState,useEffect } from 'react'
 const Product = () => {
-  const {all_product}= useContext(ShopContext);
+  // const {all_product}= useContext(ShopContext);
   const {addToCart} = useContext(ShopContext);
+  console.log(addToCart)
   const {productId} = useParams();
   const[all_products,setAllProducts]= useState([]);
   useEffect(()=>{
@@ -27,13 +28,15 @@ const Product = () => {
   console.log(all_products)
   console.log(productId)
   // console.log(all_products[0].name);
-  const product = all_product.find((e)=> e.id ===Number(productId));
+  // const product = all_product.find((e)=> e.id ===Number(productId));
   return (
     <div> 
-          <div className=' flex items-center text-base text-gray-800 py-8 pl-10 gap-2 '>
+          
       {all_products.map((object) => (
         <div key={object.id}>
+          <div className=' flex items-center text-base text-gray-800 py-8 pl-10 gap-2 '>
            HOME / SHOP / {object.category} / {object.name}
+           </div>
            <div className="bg-white">
         <div className=" grid grid-cols-2">
           {/* <!-- Image gallery --> */}
@@ -120,9 +123,9 @@ const Product = () => {
                       aria-hidden="true"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                       />
                     </svg>
                     <svg
@@ -132,9 +135,9 @@ const Product = () => {
                       aria-hidden="true"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                       />
                     </svg>
                     <svg
@@ -144,9 +147,9 @@ const Product = () => {
                       aria-hidden="true"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                       />
                     </svg>
                     <svg
@@ -156,9 +159,9 @@ const Product = () => {
                       aria-hidden="true"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                       />
                     </svg>
                     <svg
@@ -168,9 +171,9 @@ const Product = () => {
                       aria-hidden="true"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                       />
                     </svg>
                   </div>
@@ -185,7 +188,7 @@ const Product = () => {
                 <div className="mt-10">
 
                   <button onClick={()=>{addToCart(object.id)}}
-                  type="submit"
+                  // type="submit"
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-slate-600 hover:bg-pink-500 px-8 py-3 text-base font-medium text-white "
                 >
                   Add to bag
@@ -288,7 +291,7 @@ const Product = () => {
         </div>
 
       ))}
-    </div>
+    
       <Footer/>
     </div>
   )

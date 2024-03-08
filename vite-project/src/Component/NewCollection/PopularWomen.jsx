@@ -20,6 +20,7 @@ export default function NewCollection() {
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {new_collection.map((product) => (
             <div key={product.id} className="group relative">
+              <Link to={`/product/${product.id}`}>
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                 
                 <img
@@ -47,6 +48,7 @@ export default function NewCollection() {
                 </div>
                 {/* <p className="text-sm font-medium text-gray-900">{product.old_price}</p> */}
               </div>
+              </Link>
             </div>
           ))}
         </div>
