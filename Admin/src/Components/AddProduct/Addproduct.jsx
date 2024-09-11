@@ -39,8 +39,6 @@ export default function AddProduct() {
       body:formData,
     }).then((res)=> res.json()).then((data)=>{responseData=data})
 
-
-    
     if(responseData.success){
       product.image = responseData.image_url;
       console.log(product);
