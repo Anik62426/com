@@ -13,7 +13,7 @@ export default function LoginSignup() {
   const login = async () =>{
  console.log("login",formData);
  let responseData;
- await fetch('https://e-com-uryk.onrender.com/login',{
+ await fetch('https://ecommerce-backend-27wa.onrender.com/login',{
    method:'POST',
    headers:{
      Accept:'application/form-data',
@@ -21,7 +21,7 @@ export default function LoginSignup() {
    },
    body:JSON.stringify(formData),
  }).then((response)=>response.json()).then((data)=>responseData=data)
-
+ 
  if(responseData.success){
    localStorage.setItem('auth-token',responseData.token);
    window.location.replace("/")
@@ -34,7 +34,7 @@ export default function LoginSignup() {
   const signup = async() =>{
   console.log("signup",formData);
   let responseData;
-  await fetch('https://e-com-uryk.onrender.com/signup',{
+  await fetch('https://ecommerce-backend-27wa.onrender.com/signup',{
     method:'POST',
     headers:{
       Accept:'application/form-data',

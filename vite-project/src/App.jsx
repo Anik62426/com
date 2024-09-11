@@ -18,7 +18,7 @@ const App = () => {
     <Navbar/>
      <Routes>
       <Route path='/' element={<Shop/>}/>   
-      <Route path='/men' element={<ShopCategory category="men"  banner={men_banner} />}/> 
+      <Route path='/men' element={<ShopCategory category="mens"  banner={men_banner} />}/> 
       <Route path='/women' element={<ShopCategory category="women" banner={women_banner}/>}/> 
       <Route path='/kid' element={<ShopCategory category="kid" banner={kid_banner}/>}/>
       <Route path='/product' element={<Product/>}>

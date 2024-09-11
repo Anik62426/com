@@ -11,25 +11,27 @@ export default function AddProduct() {
     image:"",
     category:"women",
     new_price:"",
-    old_price:""
+    old_price:"",
+    rating:""
   })
-
+  // console.log(productDetail)
   const imageHandler = (e) => {
      setImage(e.target.files[0]);
   }
    
   const changeHandler = (e) =>{
     setProductDetail({...productDetail,[e.target.name]:e.target.value})
+    console.log(e.target.value);
   }
 
   const Add_Product = async ()=>{
-    // console.log(productDetail);
+    
     let responseData;
     let product = productDetail;
     let formData = new FormData();
     formData.append('product',image);
 
-    await fetch('https://e-com-uryk.onrender.com/upload',{
+    await fetch('https://ecommerce-backend-27wa.onrender.com/upload',{
       method: 'POST',
       headers: {
           Accept:'application/json',
@@ -39,12 +41,14 @@ export default function AddProduct() {
 
     if(responseData.success){
       product.image = responseData.image_url;
-      // console.log(product);
-      await fetch('https://e-com-uryk.onrender.com/addproduct',{
+      console.log(product);
+      await fetch('https://ecommerce-backend-27wa.onrender.com/addproduct',{
       method: 'POST',
       headers: {
           Accept:'application/json',
           'Content-Type':'application/json',
+
+          
       },
       body:JSON.stringify(product),
     }).then((res)=>res.json()).then((data)=>{
@@ -60,7 +64,7 @@ export default function AddProduct() {
 
         <div className="border-b border-gray-900/10 pb-5">
           <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-
+           {/* Product Name */}
           <div className="sm:col-span-4">
             <h2 className='border-b border-gray-900/10 pb-5'>Add Products Into Database</h2>
               <div className="block text-sm  text-center font-medium leading-6 text-gray-900">
@@ -77,6 +81,7 @@ export default function AddProduct() {
               </div>
             </div>
           
+           {/* Original price */}
           
             <div className="sm:col-span-3">
               <div className="block text-sm text-center font-medium leading-6 text-gray-900">
@@ -94,6 +99,8 @@ export default function AddProduct() {
               </div>
             </div>
 
+           {/* Discount Price*/}
+          
             <div className="sm:col-span-3">
               <div className="block text-sm text-center font-medium leading-6 text-gray-900">
               Discount Price
@@ -109,8 +116,8 @@ export default function AddProduct() {
               </div>
             </div>
 
-            
-
+           {/* Category */}
+          
             <div className="sm:col-span-3">
               <div className="block text-base text-center font-medium leading-6 text-gray-900">
                 Category
@@ -122,12 +129,32 @@ export default function AddProduct() {
                   name="category"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 >
-                  <option>men</option>
+                  <option>mens</option>
                   <option>women</option>
                   <option>kid</option>
                 </select>
               </div>
             </div>
+           
+           {/* Rating */}
+
+            <div className="sm:col-span-3">
+              <div className="block text-sm text-center font-medium leading-6 text-gray-900">
+              Rating
+              </div>
+              <div className="mt-2 ">
+                <input
+                  value={productDetail.rating}
+                  onChange={changeHandler}
+                  name="rating"
+      
+                  className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+             
+           {/* Product Photo */}
+
 
             <div className="col-span-full">
               <label htmlFor="Product Photo" className="block text-sm text-c font-medium leading-6 text-gray-900">

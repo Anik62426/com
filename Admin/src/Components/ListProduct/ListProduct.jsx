@@ -5,7 +5,7 @@ const ListProduct = () => {
   const[allproducts,setAllProducts]= useState([]);
  
   const fetchInfo = async()=>{
-    await fetch('https://e-com-uryk.onrender.com/allproducts').then((res)=>res.json()).then((data)=>{setAllProducts(data)})
+    await fetch('https://ecommerce-backend-27wa.onrender.com/allproducts').then((res)=>res.json()).then((data)=>{setAllProducts(data)})
   }
 
   useEffect(()=>{
@@ -13,7 +13,7 @@ const ListProduct = () => {
   },[])
    
   const remove_product = async(id)=>{
-    await fetch('https://e-com-uryk.onrender.com/removeproduct',{
+    await fetch('https://ecommerce-backend-27wa.onrender.com/removeproduct',{
       method:'POST',
       headers:{
         Acceept: 'application/json',
@@ -38,6 +38,7 @@ const ListProduct = () => {
       <br/>
       <p className='px-2' >Discount Price</p>
       <p className='pl-2' >Category</p>
+      <p className='pl-2' >Rating</p>
       {/* <p>Remove</p>  */}
      </div> 
      
@@ -50,6 +51,7 @@ const ListProduct = () => {
         <p className=' text-base font-medium text-gray-900' > {product.old_price} </p>
         <p className=' text-base font-medium text-gray-900' > {product.new_price} </p>
         <p className=' text-base font-medium text-gray-900' > {product.category} </p>
+        <p className=' text-base font-medium text-gray-900' > {product.rating}★ </p>
         <img onClick={()=>{ remove_product(product.id)}} src={cross_icon } alt=""className='cursor-pointer' />
         </div>
         

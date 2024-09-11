@@ -16,12 +16,12 @@ const ShopContextProvider = (props) =>{
     const [cartItems,setCartItems] = useState(getDefaultCart());
 
     useEffect(()=>{
-        fetch('https://e-com-uryk.onrender.com/allproducts')
+        fetch('https://ecommerce-backend-27wa.onrender.com/allproducts')
         .then((response)=>response.json())
         .then((data)=>setAll_Product(data))
 
         if(localStorage.getItem('auth-token')){
-            fetch('https://e-com-uryk.onrender.com/getcart',{
+            fetch('https://ecommerce-backend-27wa.onrender.com/getcart',{
                 method:'POST',
                 headers:{
                     Accept:'application/form-data',
@@ -37,7 +37,7 @@ const ShopContextProvider = (props) =>{
     const addToCart = (itemId) =>{
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId] + 1}))
         if(localStorage.getItem('auth-token')){
-            fetch('https://e-com-uryk.onrender.com/addtocart',{
+            fetch('https://ecommerce-backend-27wa.onrender.com/addtocart',{
                 method:'POST',
                 headers:{
                     Accept:'application/form-data',
@@ -46,14 +46,14 @@ const ShopContextProvider = (props) =>{
                 },
                 body:JSON.stringify({"itemId":itemId}),
             })
-            .then((response)=>response.json())
+            .then((response)=> response.json())
             .then((data)=>console.log(data));
         }
     }
     const removeFromCart = (itemId) =>{
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}))
         if(localStorage.getItem('auth-token')){
-            fetch('https://e-com-uryk.onrender.com/removefromcart',{
+            fetch('https://ecommerce-backend-27wa.onrender.com/removefromcart',{
                 method:'POST',
                 headers:{
                     Accept:'application/form-data',
@@ -62,32 +62,61 @@ const ShopContextProvider = (props) =>{
                 },
                 body:JSON.stringify({"itemId":itemId}),
             })
-            .then((response)=>response.json())
+            .then((response)=> response.json())
             .then((data)=>console.log(data));
         }
     }
 
 
     const getTotalCartAmounts = () =>{
-        let totalAmount = 0;
-        for(const item in cartItems){
-            if(cartItems[item]>0){
-                let itemInfo = all_product.find((product)=>product.id === Number(item))
-                totalAmount += itemInfo.new_price*cartItems[item];
+
+        let totalsAmounts = 0;
+        for (const item in cartItems) {
+          if (cartItems[item] > 0) {
+            const itemInfo = all_product.find((product) => product.id === Number(item));
+            if (itemInfo) {
+              totalsAmounts += itemInfo.new_price * cartItems[item];
+            } else {
+              console.warn(`Product with ID ${Number(item)} not found`);
             }
+          }
         }
-        return totalAmount;
+        return totalsAmounts;
+       
     }
 
     const getOldCartAmounts = () =>{
-        let totalsAmount = 0;
-        for(const item in cartItems){
-            if(cartItems[item]>0){
-                let itemInfo = all_product.find((product)=>product.id === Number(item))
-                totalsAmount += itemInfo.old_price*cartItems[item];
+      
+        let totalsAmounts = 0;
+        for (const item in cartItems) {
+          if (cartItems[item] > 0) {
+            const itemInfo = all_product.find((product) => product.id === Number(item));
+            if (itemInfo) {
+              totalsAmounts += itemInfo.old_price * cartItems[item];
+            } else {
+              console.warn(`Product with ID ${Number(item)} not found`);
             }
+          }
         }
-        return totalsAmount;
+        return totalsAmounts;
+
+    }
+
+    const getDiscountCartAmounts = () =>{
+        let totalsAmounts = 0;
+        for (const item in cartItems) {
+          if (cartItems[item] > 0) {
+            const itemInfo = all_product.find((product) => product.id === Number(item));
+            if (itemInfo) {
+                totalsAmounts += itemInfo.old_price*cartItems[item] - itemInfo.new_price*cartItems[item];
+            } else {
+              console.warn(`Product with ID ${Number(item)} not found`);
+            }
+          }
+        }
+        return totalsAmounts;
+
+       
     }
 
     const getTotalCartItems = ()=>{
@@ -97,10 +126,11 @@ const ShopContextProvider = (props) =>{
                 totalItem+= cartItems[item];
             }
         }
+        console.log(totalItem)
         return totalItem;
     }
    
-    const contextValue = { all_product,cartItems,addToCart,removeFromCart,getTotalCartAmounts,getTotalCartItems,getOldCartAmounts };
+    const contextValue = { all_product,cartItems,addToCart,removeFromCart,getTotalCartAmounts,getTotalCartItems,getOldCartAmounts,getDiscountCartAmounts };
 
     
     return(
